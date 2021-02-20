@@ -2,9 +2,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.* ;
+import java.util.ArrayList;
 
 
-public class quiz  implements ActionListener {
+public class quiz implements ActionListener  {
+
+
+
+  ArrayList<String> names = new ArrayList<>() ;
+  String[][] options = new String[4][4] ;
 
     String[] questions = {
             "which company created java  ? " ,
@@ -26,7 +33,7 @@ public class quiz  implements ActionListener {
     } ;
   char guess ;
   char answer ;
-  int index ;
+  int index  = 0 ;
   int corrent_guess = 0 ;
   int total_question = questions.length;
   int result ;
@@ -61,7 +68,9 @@ public class quiz  implements ActionListener {
         }
     }) ;
 
-    quiz(){
+    quiz( ArrayList<String> names , String[][] a ){
+        this.names = names ;
+        this.options = a ;
           frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
           frame.setSize(650 ,650);
           frame.getContentPane().setBackground(new Color(50 ,50 ,50));
@@ -196,14 +205,15 @@ public class quiz  implements ActionListener {
        }
        else {
            textField.setText("Question "+ (index+1));
-           area.setText(questions[index]);
-           answer_a.setText(option[index][0]);
-           answer_b.setText(option[index][1]);
-           answer_c.setText(option[index][2]);
-           answer_d.setText(option[index][3]);
+           area.setText(names.get(index));
+           answer_a.setText(options[index][0]);
+           answer_b.setText(options[index][1]);
+           answer_c.setText(options[index][2]);
+           answer_d.setText(options[index][3]);
            timer.start();
 
        }
+
     }
 
     @Override
